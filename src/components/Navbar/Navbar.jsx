@@ -24,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 pr-3 shadow-md lg:pr-6 py-3 flex items-center justify-between bg-white">
+    <nav className="sticky top-0 z-50 pr-3 shadow-md lg:pr-6 py-3 flex items-center justify-between bg-white">
       {/* Logo */}
       <div className="flex items-center gap-2">
         <img
