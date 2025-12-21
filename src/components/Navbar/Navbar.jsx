@@ -1,12 +1,12 @@
 import { NavLink } from "react-router";
 import logo from "../../assets/logo.png";
-import { FaRegHeart, FaSearch, FaBars, FaTimes } from "react-icons/fa";
+import { FaRegHeart, FaSearch, FaBars } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import { useState } from "react";
 import MobileMenu from "./MobileMenu";
 
 const Navbar = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [search, setSearch] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
 
   const links = [
@@ -20,94 +20,109 @@ const Navbar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Search submitted:", searchTerm);
+    console.log("Search submitted:", search);
   };
 
   return (
-    <nav className="sticky top-0 z-50 pr-3 shadow-md lg:pr-6 py-3 flex items-center justify-between bg-white">
-      {/* Logo */}
-      <div className="flex items-center gap-2">
-        <img
-          src={logo}
-          alt="ZETROO Logo"
-          className="w-12 h-12 object-contain "
-        />
-        <h2 className="text-2xl font-extrabold font-brand">ZETROO</h2>
-      </div>
+    <nav className="sticky top-0 z-50 px-3 lg:px-6 py-3 shadow-md bg-white">
+      <div className="flex items-center justify-between">
+        {/* Logo */}
+        <div className="flex items-center gap-2">
+          <img
+            src={logo}
+            alt="ZETROO Logo"
+            className="w-10 h-10 object-contain"
+          />
+          <h2 className="text-xl md:text-2xl font-extrabold font-brand">
+            ZETROO
+          </h2>
+        </div>
 
-      {/* Desktop Links */}
-      <ul className="hidden md:flex gap-6">
-        {links.map((link) => (
-          <li key={link.name}>
-            <NavLink
-              to={link.to}
-              className={({ isActive }) =>
-                `relative text-black 
-                 after:block after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all
-                 hover:after:w-full ${
-                   isActive ? "after:w-full font-medium" : ""
-                 }`
-              }
-            >
-              {link.name}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
+        {/* Desktop Links */}
+        <ul className="hidden md:flex gap-6">
+          {links.map((link) => (
+            <li key={link.name}>
+              <NavLink
+                to={link.to}
+                className={({ isActive }) =>
+                  `relative text-black 
+                  after:block after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all
+                  hover:after:w-full ${
+                    isActive ? "after:w-full font-medium" : ""
+                  }`
+                }
+              >
+                {link.name}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
 
-      {/* Right Section Desktop */}
-      <div className="hidden lg:flex items-center gap-4">
-        {/* Search */}
-        <form
-          onSubmit={handleSubmit}
-          className="flex items-center"
-        >
-          <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden h-10">
-            <input
-              type="text"
-              placeholder="Search in ZETROO"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-64 px-4 py-2 bg-[#F5F5F5] text-gray-800 placeholder-gray-500 focus:outline-none"
-            />
-            <button
-              type="submit"
-              className="px-4 py-3 bg-[#DB4444] text-white hover:bg-[#e75757] cursor-pointer transition-colors flex items-center justify-center"
-            >
-              <FaSearch className="text-xl" />
-            </button>
+        {/* Desktop Right Section */}
+        <div className="hidden md:flex items-center gap-4">
+          {/* Search */}
+          <form onSubmit={handleSubmit} className="hidden lg:flex">
+            <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden h-10">
+              <input
+                type="text"
+                placeholder="Search in ZETROO"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-64 p-4  bg-[#F5F5F5] focus:outline-none"
+              />
+              <button className="p-4 bg-[#DB4444] text-white">
+                <FaSearch />
+              </button>
+            </div>
+          </form>
+
+          {/* Wishlist & Cart */}
+          <div className="flex items-center gap-4 text-2xl">
+            <div className="relative">
+              <FaRegHeart />
+              <span className="absolute -top-2 -right-2 text-[10px] bg-red-500 text-white h-5 w-5 rounded-full flex items-center justify-center">
+                20
+              </span>
+            </div>
+            <div className="relative">
+              <IoCartOutline />
+              <span className="absolute -top-2 -right-2 text-[10px] bg-red-500 text-white h-5 w-5 rounded-full flex items-center justify-center">
+                4
+              </span>
+            </div>
           </div>
-        </form>
+        </div>
 
-        {/* Cart & Wishlist */}
-        <div className="flex items-center gap-4 text-gray-700 text-2xl">
-          <div className="relative ">
-            <FaRegHeart className="cursor-pointer " />
-            <p className="absolute -top-3 -right-3 text-[10px] bg-red-500 text-white rounded-full h-5 w-5 flex items-center justify-center font-bold ">
+        {/* Mobile Right Section */}
+        <div className="md:hidden flex items-center gap-4 text-2xl">
+          {/* Wishlist */}
+          <div className="relative">
+            <FaRegHeart />
+            <span className="absolute -top-2 -right-2 text-[10px] bg-red-500 text-white h-5 w-5 rounded-full flex items-center justify-center">
               20
-            </p>
+            </span>
           </div>
-          <div className="relative ">
-            <IoCartOutline className="cursor-pointer " />
-            <p className="absolute -top-3 -right-3 text-[10px] bg-red-500 text-white rounded-full h-5 w-5 flex items-center justify-center font-bold ">
+
+          {/* Cart */}
+          <div className="relative">
+            <IoCartOutline />
+            <span className="absolute -top-2 -right-2 text-[10px] bg-red-500 text-white h-5 w-5 rounded-full flex items-center justify-center">
               4
-            </p>
+            </span>
           </div>
+
+          {/* Menu */}
+          <button onClick={() => setMenuOpen(true)}>
+            <FaBars />
+          </button>
         </div>
       </div>
 
-      {/* Mobile Menu Icon */}
-      <div className="md:hidden flex items-center ">
-        <button onClick={() => setMenuOpen(true)}>
-          <FaBars className="text-2xl" />
-        </button>
-      </div>
-
-      {/* Mobile Sidebar Menu */}
+      {/* Mobile Sidebar */}
       <MobileMenu
         links={links}
-        closeMenu={() => setMenuOpen(false)}
         menuOpen={menuOpen}
+        closeMenu={() => setMenuOpen(false)}
       />
     </nav>
   );

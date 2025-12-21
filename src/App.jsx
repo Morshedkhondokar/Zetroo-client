@@ -3,12 +3,12 @@ import Navbar from './components/Navbar/Navbar'
 
 const App = () => {
   return (
-    <div>
+    <div className='max-w-7xl mx-auto'>
        {/* navbar */}
         <Navbar/>
        {/* Outlate */}
         <Outlet/>
-        <div className='h-screen'>
+        <div className='h-screen bg-green-700'>
 
         </div>
        {/* Footer */}

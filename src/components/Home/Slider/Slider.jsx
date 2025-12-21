@@ -16,7 +16,7 @@ const Slider = () => {
       autoplay={{ delay: 3000 }}
       navigation
       pagination={{ clickable: true }}
-      className="h-[250px] md:h-96"
+      className="h-62.5 md:h-96"
     >
       <SwiperSlide className="h-full">
         <img
