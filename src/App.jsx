@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router'
 import Navbar from './components/Navbar/Navbar'
+import Footer from './components/Footer/Footer'
 
 const App = () => {
   return (
@@ -8,11 +9,9 @@ const App = () => {
         <Navbar/>
        {/* Outlate */}
         <Outlet/>
-        <div className='h-screen bg-[#ffffff]'>
-
-        </div>
-       {/* Footer */}
        
+       {/* Footer */}
+       <Footer/>
     </div>
   )
 }
