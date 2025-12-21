@@ -30,7 +30,7 @@ const router = createBrowserRouter([
                 Component:Contact
             },
             {
-                path:'/productsDetails',
+                path:'/productsDetails/:id',
                 Component:ProductsDetails
             },
             

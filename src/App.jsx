@@ -8,7 +8,7 @@ const App = () => {
         <Navbar/>
        {/* Outlate */}
         <Outlet/>
-        <div className='h-screen bg-green-700'>
+        <div className='h-screen bg-[#ffffff]'>
 
         </div>
        {/* Footer */}

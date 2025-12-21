@@ -16,3 +16,10 @@ html,body{
   }
 }
 
+
+@layer utilities{
+  .primary-btn{
+    @apply bg-[#db4444] text-white py-3 px-4 hover:scale-95 hover:shadow-lg transition ease-in cursor-pointer
+  } 
+}
+
