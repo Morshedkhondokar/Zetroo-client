@@ -52,26 +52,30 @@ const FlashSale = () => {
                                    before:backdrop-blur-sm before:rounded-2xl hover:before:bg-white/20 
                                    transition-all duration-300 hover:scale-[1.02] hover:shadow-3xl">
                     {/* Days */}
-                    <span className="bg-white/20 backdrop-blur-sm px-2 py-1 rounded-lg min-w-[28px] text-center drop-shadow-lg">
+                    <p className="bg-white/20 flex flex-col backdrop-blur-sm px-2 py-1 rounded-lg min-w-[28px] text-center drop-shadow-lg">
                       {String(days).padStart(2, "0")}
-                    </span>
+                      <span className="text-xs">Day</span>
+                    </p>
                     <span className="text-2xl md:text-3xl font-black text-white drop-shadow-md">:</span>
                     
                     {/* Hours */}
-                    <span className="bg-white/20 backdrop-blur-sm px-2 py-1 rounded-lg min-w-[28px] text-center drop-shadow-lg">
+                    <p className="bg-white/20 flex flex-col backdrop-blur-sm px-2 py-1 rounded-lg min-w-[28px] text-center drop-shadow-lg">
                       {String(hours).padStart(2, "0")}
-                    </span>
+                      <span className="text-xs">Hours</span>
+                    </p>
                     <span className="text-2xl md:text-3xl font-black text-white drop-shadow-md">:</span>
                     
                     {/* Minutes */}
-                    <span className="bg-white/20 backdrop-blur-sm px-2 py-1 rounded-lg min-w-[28px] text-center drop-shadow-lg">
+                    <span className="bg-white/20 flex flex-col backdrop-blur-sm px-2 py-1 rounded-lg min-w-[28px] text-center drop-shadow-lg">
                       {String(minutes).padStart(2, "0")}
+                      <span className="text-xs">Minutes</span>
                     </span>
                     <span className="text-2xl md:text-3xl font-black text-white drop-shadow-md">:</span>
                     
                     {/* Seconds */}
-                    <span className="bg-white/20 backdrop-blur-sm px-2 py-1 rounded-lg min-w-[28px] text-center drop-shadow-lg animate-pulse">
+                    <span className="bg-white/20 flex flex-col backdrop-blur-sm px-2 py-1 rounded-lg min-w-[28px] text-center drop-shadow-lg animate-pulse">
                       {String(seconds).padStart(2, "0")}
+                      <span className="text-xs">Seconds</span>
                     </span>
                   </div>
                 );
