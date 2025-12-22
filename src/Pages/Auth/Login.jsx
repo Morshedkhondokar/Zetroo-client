@@ -1,17 +1,33 @@
 import Lottie from "lottie-react";
 import { useForm } from "react-hook-form";
 import loginLottie from "../../../public/Login.json";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import useAuth from "../../components/hooks/useAuth";
+import toast from "react-hot-toast";
+import { ImSpinner9 } from "react-icons/im";
 
 const Login = () => {
+  const {signIn,loading,setLoading } = useAuth()
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Login Data:", data);
+
+  const onSubmit = async(data) => {
+    const email = data.email
+    const password = data.password
+      try {
+        setLoading(true)
+          await signIn(email,password)
+          toast.success('Login Successfully.')
+          navigate('/')
+      } catch (error) {
+        setLoading(false)
+        console.log(error)
+      }
   };
 
   return (
@@ -89,14 +105,17 @@ const Login = () => {
                   {errors.password.message}
                 </p>
               )}
+              <p onClick={()=>alert('Forgot password comming soon')} className="text-xs mt-3 underline cursor-pointer">Forgot Password?</p>
             </div>
 
             {/* Button */}
             <button
+            disabled={loading}
               type="submit"
-              className="w-full mt-4 bg-black text-white py-2.5 rounded-lg hover:bg-gray-800 transition font-medium"
+              className="w-full mt-4 bg-black text-white py-2.5 rounded-lg hover:bg-gray-800 transition font-medium cursor-pointer"
             >
-              Login
+               {loading ? (<ImSpinner9 className="animate-spin m-auto" />): " Login"}
+              
             </button>
             <p className="text-sm text-center mt-5 text-gray-600">
               Don’t have an account?{" "}

@@ -4,19 +4,26 @@ import { FaRegHeart, FaSearch, FaBars } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import { useState } from "react";
 import MobileMenu from "./MobileMenu";
+import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, logOut } = useAuth();
 
   const links = [
     { name: "Home", to: "/" },
     { name: "Products", to: "/products" },
     { name: "About", to: "/about" },
-    { name: "Dashboard", to: "/dashboard" },
+
     { name: "Contact", to: "/contact" },
-    { name: "Login", to: "/login" },
   ];
+
+  if (!user) {
+    links.push({ name: "Login", to: "/login" });
+  } else {
+    links.push({ name: "Dashboard", to: "/dashboard" });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,7 +68,10 @@ const Navbar = () => {
         {/* Desktop Right Section */}
         <div className="hidden md:flex items-center gap-4">
           {/* Search */}
-          <form onSubmit={handleSubmit} className="hidden lg:flex">
+          <form
+            onSubmit={handleSubmit}
+            className="hidden lg:flex"
+          >
             <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden h-10">
               <input
                 type="text"
@@ -84,12 +94,28 @@ const Navbar = () => {
                 20
               </span>
             </div>
-            <Link to={'/cart'} className="relative">
+            <Link
+              to={"/cart"}
+              className="relative"
+            >
               <IoCartOutline />
               <span className="absolute -top-2 -right-2 text-[10px] bg-red-500 text-white h-5 w-5 rounded-full flex items-center justify-center">
                 4
               </span>
             </Link>
+            {/* profile */}
+            {user && (
+              <div
+                onClick={logOut}
+                className="h-8 w-8 rounded-full bg-green-400 overflow-hidden cursor-pointer"
+              >
+                <img
+                  src={user.photoURL}
+                  alt="User Profile"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
           </div>
         </div>
 
@@ -104,7 +130,10 @@ const Navbar = () => {
           </div>
 
           {/* Cart */}
-          <Link to={'/cart'} className="relative">
+          <Link
+            to={"/cart"}
+            className="relative"
+          >
             <IoCartOutline />
             <span className="absolute -top-2 -right-2 text-[10px] bg-red-500 text-white h-5 w-5 rounded-full flex items-center justify-center">
               4
