@@ -28,7 +28,7 @@ const Footer = () => {
           <h3 className="text-white text-lg font-semibold mb-4">Support</h3>
           <p className="text-sm mb-2">111 Bijoy sarani, Dhaka,</p>
           <p className="text-sm mb-2">DH 1515, Bangladesh.</p>
-          <p className="text-sm mb-2">exclusive@gmail.com</p>
+          <p className="text-sm mb-2">Zetroo@gmail.com</p>
           <p className="text-sm">+88015-88888-9999</p>
         </div>
 

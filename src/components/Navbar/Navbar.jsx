@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import logo from "../../assets/logo.png";
 import { FaRegHeart, FaSearch, FaBars } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
@@ -84,12 +84,12 @@ const Navbar = () => {
                 20
               </span>
             </div>
-            <div className="relative">
+            <Link to={'/cart'} className="relative">
               <IoCartOutline />
               <span className="absolute -top-2 -right-2 text-[10px] bg-red-500 text-white h-5 w-5 rounded-full flex items-center justify-center">
                 4
               </span>
-            </div>
+            </Link>
           </div>
         </div>
 
@@ -104,12 +104,12 @@ const Navbar = () => {
           </div>
 
           {/* Cart */}
-          <div className="relative">
+          <Link to={'/cart'} className="relative">
             <IoCartOutline />
             <span className="absolute -top-2 -right-2 text-[10px] bg-red-500 text-white h-5 w-5 rounded-full flex items-center justify-center">
               4
             </span>
-          </div>
+          </Link>
 
           {/* Menu */}
           <button onClick={() => setMenuOpen(true)}>
