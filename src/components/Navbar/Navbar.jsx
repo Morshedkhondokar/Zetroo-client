@@ -110,7 +110,8 @@ const Navbar = () => {
                 className="h-8 w-8 rounded-full bg-green-400 overflow-hidden cursor-pointer"
               >
                 <img
-                  src={user.photoURL}
+                  src={user?.photoURL}
+                  referrerPolicy="no-referrer"
                   alt="User Profile"
                   className="w-full h-full object-cover"
                 />

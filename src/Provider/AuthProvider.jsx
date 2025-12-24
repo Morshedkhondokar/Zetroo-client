@@ -7,11 +7,16 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
+import useAxiosCommon from "../hooks/useAxiosCommon";
+const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
+  const axiosCommon = useAxiosCommon();
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -23,21 +28,40 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const logOut = async () => {
-    setLoading(true)
-    return signOut(auth)
-  }
+  const signInWithGoogle = () => {
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
 
-  const updateUserProfile = (name, photo)=>{
-     return updateProfile(auth.currentUser, {
+  const logOut = async () => {
+    setLoading(true);
+    await axiosCommon.post("/logout", {}, { withCredentials: true });
+    return signOut(auth);
+  };
+
+  const updateUserProfile = (name, photo) => {
+    return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
-    })
-  }
+    });
+  };
+
+  // Get token from server
+  const getToken = async (email) => {
+    const { data } = await axiosCommon.post(
+      `/jwt`,
+      { email },
+      { withCredentials: true }
+    );
+    return data;
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      if (currentUser) {
+        getToken(currentUser.email);
+      }
       setLoading(false);
     });
     return unsubscribe;
@@ -49,6 +73,7 @@ const AuthProvider = ({ children }) => {
     setLoading,
     createUser,
     signIn,
+    signInWithGoogle,
     logOut,
     updateUserProfile,
   };

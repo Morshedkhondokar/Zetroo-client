@@ -8,6 +8,7 @@ import { imageUpload } from "../../components/api/uploadImg";
 import Loading from "../../components/Loading/Loading";
 import { ImSpinner9 } from "react-icons/im";
 import toast from "react-hot-toast";
+import SignInGoogle from "./SignInGoogle";
 
 
 const SignUp = () => {
@@ -81,7 +82,7 @@ const SignUp = () => {
       {/* Container */}
       <div className="bg-white rounded-2xl shadow-lg w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 overflow-hidden">
         {/* Form Section */}
-        <div className="p-6 sm:p-10 flex items-center">
+        <div className="p-6 sm:p-10 flex-col items-center">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="w-full max-w-sm mx-auto"
@@ -237,7 +238,7 @@ const SignUp = () => {
              
             </button>
 
-            <p className="text-sm text-center mt-5 text-gray-600">
+            <p className="text-sm text-center my-5 text-gray-600">
               Already have an account?{" "}
               <Link
                 to="/login"
@@ -247,6 +248,8 @@ const SignUp = () => {
               </Link>
             </p>
           </form>
+           {/* Login with google */}
+            <SignInGoogle />
         </div>
 
         {/* Lottie Section */}

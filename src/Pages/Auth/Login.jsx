@@ -5,29 +5,29 @@ import { Link, useNavigate } from "react-router";
 import useAuth from "../../components/hooks/useAuth";
 import toast from "react-hot-toast";
 import { ImSpinner9 } from "react-icons/im";
+import SignInGoogle from "./SignInGoogle";
 
 const Login = () => {
-  const {signIn,loading,setLoading } = useAuth()
-  const navigate = useNavigate()
+  const { signIn, loading, setLoading } = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-
-  const onSubmit = async(data) => {
-    const email = data.email
-    const password = data.password
-      try {
-        setLoading(true)
-          await signIn(email,password)
-          toast.success('Login Successfully.')
-          navigate('/')
-      } catch (error) {
-        setLoading(false)
-        console.log(error)
-      }
+  const onSubmit = async (data) => {
+    const email = data.email;
+    const password = data.password;
+    try {
+      setLoading(true);
+      await signIn(email, password);
+      toast.success("Login Successfully.");
+      navigate("/");
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
   };
 
   return (
@@ -43,7 +43,7 @@ const Login = () => {
           />
         </div>
         {/* Form Section */}
-        <div className="p-6 sm:p-10 flex items-center">
+        <div className="p-6 sm:p-10 flex-col items-center">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="w-full max-w-sm mx-auto"
@@ -105,19 +105,27 @@ const Login = () => {
                   {errors.password.message}
                 </p>
               )}
-              <p onClick={()=>alert('Forgot password comming soon')} className="text-xs mt-3 underline cursor-pointer">Forgot Password?</p>
+              <p
+                onClick={() => alert("Forgot password comming soon")}
+                className="text-xs mt-3 underline cursor-pointer"
+              >
+                Forgot Password?
+              </p>
             </div>
 
             {/* Button */}
             <button
-            disabled={loading}
+              disabled={loading}
               type="submit"
               className="w-full mt-4 bg-black text-white py-2.5 rounded-lg hover:bg-gray-800 transition font-medium cursor-pointer"
             >
-               {loading ? (<ImSpinner9 className="animate-spin m-auto" />): " Login"}
-              
+              {loading ? (
+                <ImSpinner9 className="animate-spin m-auto" />
+              ) : (
+                " Login"
+              )}
             </button>
-            <p className="text-sm text-center mt-5 text-gray-600">
+            <p className="text-sm text-center my-5 text-gray-600">
               Don’t have an account?{" "}
               <Link
                 to="/signUp"
@@ -127,6 +135,8 @@ const Login = () => {
               </Link>
             </p>
           </form>
+            {/* Login with google */}
+            <SignInGoogle />
         </div>
       </div>
     </div>
