@@ -1,27 +1,44 @@
-import {products} from "../../../public/fakeData";
+// import {products} from "../../../public/fakeData";
+import toast from "react-hot-toast";
+import useAxiosCommon from "../../hooks/useAxiosCommon";
+import Loading from "../Loading/Loading";
 import Card from "./Card";
+import { useQuery } from "@tanstack/react-query";
 
 const ProductsCard = ({ onlyDiscount }) => {
-  let filteredProducts = products;
+  const axiosCommon = useAxiosCommon();
 
-  if (onlyDiscount === true) {
-    // শুধু discount products
-    filteredProducts = products.filter(
-      (p) => p.discount && p.discount > 0
-    );
-  } 
-  else if (onlyDiscount === false) {
-    // শুধু without discount products
-    filteredProducts = products.filter(
-      (p) => !p.discount || p.discount === 0
-    );
+  const {
+    data: products = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["allProducts"],
+    queryFn: async () => {
+      const res = await axiosCommon.get("/products");
+      return res.data;
+    },
+  });
+
+  console.log(products)
+
+  if (isLoading) {
+    return <Loading />;
   }
-  // যদি prop না পাঠাও → সব products দেখাবে
+
+  if (isError) {
+    return toast.error(error.message);
+  }
+
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-      {filteredProducts.map((product) => (
-        <Card key={product.id} product={product} />
+      {products.map((product) => (
+        <Card
+          key={product._id}
+          product={product}
+        />
       ))}
     </div>
   );
