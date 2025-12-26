@@ -56,11 +56,26 @@ const AuthProvider = ({ children }) => {
     return data;
   };
 
+  // save users 
+  const saveUsers = async (user) =>{
+    const currentUser = {
+        email: user.email,
+        role: 'guest',
+        createdAt: new Date(),
+    }
+
+    const {data} = await axiosCommon.post('/user', currentUser)
+
+    return data
+
+  }
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
         getToken(currentUser.email);
+        saveUsers(currentUser)
       }
       setLoading(false);
     });
