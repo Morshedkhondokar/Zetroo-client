@@ -16,7 +16,7 @@ const ProductsCard = ({ onlyDiscount }) => {
   } = useQuery({
     queryKey: ["allProducts"],
     queryFn: async () => {
-      const res = await axiosCommon.get("/products");
+      const res = await axiosCommon.get("/products?discount=''");
       return res.data;
     },
   });

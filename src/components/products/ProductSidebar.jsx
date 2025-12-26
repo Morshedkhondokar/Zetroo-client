@@ -1,44 +1,61 @@
-const ProductSidebar = ({ onFilterChange }) => {
-
+const ProductSidebar = ({ onFilterChange, currentFilters }) => {
   // Fake categories and brands
   const categories = ["Mobile", "Laptop", "Tablet", "Smart Watch"];
   const brands = ["Apple", "Samsung", "Xiaomi", "HP"];
 
   return (
-    <div className="w-64 shadow-md p-4">
-        
-      {/* Category */}
-      <div className="mb-6">
-        <h2 className="font-semibold text-lg mb-3">Category</h2>
+    <div className="w-64  p-4">
+     
+      {/* Discount */}
+      <div className="border-b border-gray-300 py-2">
+        <h2 className="font-semibold text-lg">Flash sale</h2>
+
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input
+            type="checkbox"
+            onChange={() => onFilterChange("discount", "true")}
+            checked={currentFilters.discount === "true"}
+          />
+          <span>Flash sale</span>
+        </label>
+      </div>
+     {/* Category */}
+      <div className="mb-3">
+        <h2 className="font-semibold text-lg">Category</h2>
 
         {categories.map((category) => (
-          <label key={category} className="flex items-center gap-2">
+          <label
+            key={category}
+            className="flex items-center gap-2 cursor-pointer"
+          >
             <input
               type="checkbox"
               onChange={() => onFilterChange("categories", category)}
+              checked={currentFilters.categories.includes(category)}
             />
             <span>{category}</span>
           </label>
         ))}
-
       </div>
 
       {/* Brand */}
-      <div>
-        <h2 className="font-semibold text-lg mb-3">Brand</h2>
+      <div className="border-t border-gray-300">
+        <h2 className="font-semibold text-lg mt-2">Brand</h2>
 
         {brands.map((brand) => (
-          <label key={brand} className="flex items-center gap-2">
+          <label
+            key={brand}
+            className="flex items-center gap-2 cursor-pointer"
+          >
             <input
               type="checkbox"
               onChange={() => onFilterChange("brands", brand)}
+              checked={currentFilters.brands.includes(brand)}
             />
             <span>{brand}</span>
           </label>
         ))}
-
       </div>
-
     </div>
   );
 };

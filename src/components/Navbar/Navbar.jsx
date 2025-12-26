@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router";
+import { Link, NavLink,  useNavigate } from "react-router";
 import logo from "../../assets/logo.png";
 import { FaRegHeart, FaSearch, FaBars } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
@@ -10,6 +10,7 @@ const Navbar = () => {
   const [search, setSearch] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, logOut } = useAuth();
+
 
   const links = [
     { name: "Home", to: "/" },
@@ -26,14 +27,15 @@ const Navbar = () => {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Search submitted:", search);
-  };
+  e.preventDefault();
+  console.log(search)
+};
 
   return (
     <nav className="sticky top-0 z-50 px-3 lg:px-6 py-3 shadow-md bg-white">
       <div className="flex items-center justify-between">
         {/* Logo */}
+        <Link to={'/'}>
         <div className="flex items-center gap-2">
           <img
             src={logo}
@@ -44,6 +46,7 @@ const Navbar = () => {
             ZETROO
           </h2>
         </div>
+        </Link>
 
         {/* Desktop Links */}
         <ul className="hidden md:flex gap-6">
@@ -80,7 +83,7 @@ const Navbar = () => {
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-64 p-4  bg-[#F5F5F5] focus:outline-none"
               />
-              <button className="p-4 bg-[#DB4444] text-white">
+              <button className="p-4 bg-[#DB4444] text-white cursor-pointer">
                 <FaSearch />
               </button>
             </div>
