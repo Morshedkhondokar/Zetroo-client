@@ -1,16 +1,17 @@
-import { Link, NavLink,  useNavigate } from "react-router";
+import { Link, NavLink } from "react-router";
 import logo from "../../assets/logo.png";
 import { FaRegHeart, FaSearch, FaBars } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import MobileMenu from "./MobileMenu";
 import useAuth from "../hooks/useAuth";
+import { CartContext } from "../../Provider/CartProvider";
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, logOut } = useAuth();
-
+  const { cartCount } = useContext(CartContext);
 
   const links = [
     { name: "Home", to: "/" },
@@ -27,25 +28,25 @@ const Navbar = () => {
   }
 
   const handleSubmit = (e) => {
-  e.preventDefault();
-  console.log(search)
-};
+    e.preventDefault();
+    console.log(search);
+  };
 
   return (
     <nav className="sticky top-0 z-50 px-3 lg:px-6 py-3 shadow-md bg-white">
       <div className="flex items-center justify-between">
         {/* Logo */}
-        <Link to={'/'}>
-        <div className="flex items-center gap-2">
-          <img
-            src={logo}
-            alt="ZETROO Logo"
-            className="w-10 h-10 object-contain"
-          />
-          <h2 className="text-xl md:text-2xl font-extrabold font-brand">
-            ZETROO
-          </h2>
-        </div>
+        <Link to={"/"}>
+          <div className="flex items-center gap-2">
+            <img
+              src={logo}
+              alt="ZETROO Logo"
+              className="w-10 h-10 object-contain"
+            />
+            <h2 className="text-xl md:text-2xl font-extrabold font-brand">
+              ZETROO
+            </h2>
+          </div>
         </Link>
 
         {/* Desktop Links */}
@@ -98,13 +99,15 @@ const Navbar = () => {
               </span>
             </div>
             <Link
-              to={"/cart"}
+              to="/cart"
               className="relative"
             >
               <IoCartOutline />
-              <span className="absolute -top-2 -right-2 text-[10px] bg-red-500 text-white h-5 w-5 rounded-full flex items-center justify-center">
-                4
-              </span>
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 text-[10px] bg-red-500 text-white h-5 w-5 rounded-full flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
             </Link>
             {/* profile */}
             {user && (
@@ -135,13 +138,15 @@ const Navbar = () => {
 
           {/* Cart */}
           <Link
-            to={"/cart"}
+            to="/cart"
             className="relative"
           >
             <IoCartOutline />
-            <span className="absolute -top-2 -right-2 text-[10px] bg-red-500 text-white h-5 w-5 rounded-full flex items-center justify-center">
-              4
-            </span>
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 text-[10px] bg-red-500 text-white h-5 w-5 rounded-full flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
           </Link>
 
           {/* Menu */}
