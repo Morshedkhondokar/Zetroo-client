@@ -15,6 +15,10 @@ import AddProduct from "../Pages/Dashboard/AdminPage/AddProduct";
 import ManageProducts from "../Pages/Dashboard/AdminPage/ManageProducts";
 import ManageOrders from "../Pages/Dashboard/AdminPage/ManageOrders";
 import ManageUsers from "../Pages/Dashboard/AdminPage/ManageUsers";
+import { Profiler } from "react";
+import Profile from "../Pages/Dashboard/Profile/Profile";
+import Wishlist from "../Pages/Dashboard/userPage/Wishlist";
+import MyOrders from "../Pages/Dashboard/userPage/MyOrders";
 
 const router = createBrowserRouter([
     {
@@ -78,6 +82,19 @@ const router = createBrowserRouter([
                 path:'manage-users',
                 element: <ManageUsers/>
             },
+            {
+                path:'My-Orders',
+                element: <MyOrders/>
+            },
+            {
+                path:'Wishlist',
+                element: <Wishlist/>
+            },
+            {
+                path:'profile',
+                element: <Profile/>
+            },
+
         ]
     }
 ])

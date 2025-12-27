@@ -6,12 +6,14 @@ import { useContext, useState } from "react";
 import MobileMenu from "./MobileMenu";
 import useAuth from "../hooks/useAuth";
 import { CartContext } from "../../Provider/CartProvider";
+import { WishlistContext } from "../../Provider/WishlistProvider";
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, logOut } = useAuth();
   const { cartCount } = useContext(CartContext);
+  const {wishlist} = useContext(WishlistContext)
 
   const links = [
     { name: "Home", to: "/" },
@@ -92,12 +94,14 @@ const Navbar = () => {
 
           {/* Wishlist & Cart */}
           <div className="flex items-center gap-4 text-2xl">
-            <div className="relative">
+            <Link to={'/dashboard/wishlist'} className="relative">
               <FaRegHeart />
-              <span className="absolute -top-2 -right-2 text-[10px] bg-red-500 text-white h-5 w-5 rounded-full flex items-center justify-center">
-                20
-              </span>
-            </div>
+              {wishlist.length > 0 && (
+                <span className="absolute -top-2 -right-2 text-[10px] bg-red-500 text-white h-5 w-5 rounded-full flex items-center justify-center">
+                  {wishlist.length}
+                </span>
+              )}
+            </Link>
             <Link
               to="/cart"
               className="relative"
