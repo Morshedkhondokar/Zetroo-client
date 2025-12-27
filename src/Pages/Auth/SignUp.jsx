@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router";
 import useAuth from "../../components/hooks/useAuth";
 import { useEffect, useState } from "react";
 import { imageUpload } from "../../components/api/uploadImg";
-import Loading from "../../components/Loading/Loading";
 import { ImSpinner9 } from "react-icons/im";
 import toast from "react-hot-toast";
 import SignInGoogle from "./SignInGoogle";

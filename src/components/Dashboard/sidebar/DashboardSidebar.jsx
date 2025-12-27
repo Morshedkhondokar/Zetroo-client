@@ -15,7 +15,7 @@ const DashboardSidebar = ({ role }) => {
   const isAdmin = role === "admin";
 
   return (
-    <div className="w-64 h-screen bg-white border-r flex flex-col">
+    <div className="sticky top-0 left-0 w-64 h-screen bg-white border-r flex flex-col">
       {/* Logo */}
       <Link
         to="/"

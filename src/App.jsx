@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div className='max-w-7xl mx-auto'>
       <ScrollToTop/>
-      <Toaster position="top-center" reverseOrder={false} />
+      
        {/* navbar */}
         <Navbar/>
        {/* Outlate */}
