@@ -1,17 +1,18 @@
 import { Link } from "react-router";
+import { getFinalPrice } from "../api/price";
 
 const Card = ({ product }) => {
   const { _id, name, price, image, ratings, discount} = product;
 
-  const hasDiscount = discount > 0;
 
-  const discountedPrice = hasDiscount
-    ? Math.round(price - (price * discount) / 100)
-    : Math.round(price);
+
+   const finalPrice = getFinalPrice(price, discount);
+  const hasDiscount = discount > 0;
 
   return (
     <Link to={`/productsDetails/${_id}`}>
-      <div className="relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col h-full">
+      <div className="relative bg-white rounded-xl overflow-hidden 
+      shadow-sm hover:shadow-md transition flex flex-col h-full">
 
         {/* Image */}
         <div className="relative bg-gray-100 rounded-t-xl">
@@ -23,7 +24,8 @@ const Card = ({ product }) => {
 
           {/* Discount Badge (only if discount exists) */}
           {hasDiscount && (
-            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs 
+            font-bold px-2 py-1 rounded">
               -{discount}%
             </div>
           )}
@@ -40,7 +42,7 @@ const Card = ({ product }) => {
             <span
               className={`font-bold text-sm  text-red-500`}
             >
-              ${discountedPrice}
+              ${finalPrice}
             </span>
 
             {hasDiscount && (

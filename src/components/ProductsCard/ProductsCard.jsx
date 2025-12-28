@@ -34,7 +34,7 @@ const ProductsCard = ({ onlyDiscount }) => {
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-      {products.map((product) => (
+      {products.slice(0,10).map((product) => (
         <Card
           key={product._id}
           product={product}

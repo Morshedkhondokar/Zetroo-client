@@ -1,7 +1,7 @@
 const ProductSidebar = ({ onFilterChange, currentFilters }) => {
   // Fake categories and brands
-  const categories = ["Mobile", "Laptop", "Tablet", "Smart Watch"];
-  const brands = ["Apple", "Samsung", "Xiaomi", "HP"];
+  const categories = ["mobile", "laptop", "tablet", "smart Watch"];
+  const brands = ["apple", "samsung", "xiaomi", "hP"];
 
   return (
     <div className="w-64  p-4">

@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { products } from "../../../../public/fakeData";
 import ProductsCard from "../../ProductsCard/ProductsCard";
 const HomeProductSection = () => {
@@ -17,9 +18,11 @@ const HomeProductSection = () => {
       <div>
         <ProductsCard />
        <div className="h-14 w-44 mx-auto text-center mt-7 mb-8">
+       <Link to={'/products'}>
         <button className="primary-btn">
             View All products
         </button>
+       </Link>
       </div>
       </div>
     </div>

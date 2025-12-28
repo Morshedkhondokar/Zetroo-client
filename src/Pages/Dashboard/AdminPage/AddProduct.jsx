@@ -141,6 +141,11 @@ const AddProduct = () => {
                 <option value="watch">Smart Watch</option>
                 <option value="tablet">Tablet</option>
               </select>
+                {errors.category && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.category.message}
+                </p>
+              )}
             </div>
 
             {/* Brand */}
@@ -152,6 +157,11 @@ const AddProduct = () => {
                 className="w-full border rounded-lg px-3 py-2"
                 {...register("brand", { required: "Brand is required" })}
               />
+               {errors.brand && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.brand.message}
+                </p>
+              )}
             </div>
 
             {/* Price */}
@@ -163,6 +173,11 @@ const AddProduct = () => {
                 className="w-full border rounded-lg px-3 py-2"
                 {...register("price", { required: "Price is required" })}
               />
+               {errors.price && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.price.message}
+                </p>
+              )}
             </div>
 
             {/* Discount (Optional, max 100) */}
@@ -191,6 +206,11 @@ const AddProduct = () => {
                 className="w-full border rounded-lg px-3 py-2"
                 {...register("stock", { required: "Stock is required" })}
               />
+               {errors.stock && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.stock.message}
+                </p>
+              )}
             </div>
 
             {/* Ratings */}
@@ -205,6 +225,11 @@ const AddProduct = () => {
                 className="w-full border rounded-lg px-3 py-2"
                 {...register("ratings", { required: "Ratings are required" })}
               />
+                 {errors.ratings && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.ratings.message}
+                </p>
+              )}
             </div>
 
             {/* Colors */}
@@ -218,6 +243,11 @@ const AddProduct = () => {
                 className="w-full border rounded-lg px-3 py-2"
                 {...register("color", { required: "At least one color required" })}
               />
+                {errors.color && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.color.message}
+                </p>
+              )}
             </div>
 
             {/* Image Upload */}
@@ -241,6 +271,11 @@ const AddProduct = () => {
                   className="w-full text-sm border rounded-lg px-3 py-2"
                   {...register("image", { required: "Image is required" })}
                 />
+                  {errors.image && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.image.message}
+                </p>
+              )}
               </div>
             </div>
 

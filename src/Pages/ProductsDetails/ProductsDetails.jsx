@@ -7,6 +7,7 @@ import Loading from "../../components/Loading/Loading";
 import toast from "react-hot-toast";
 import { CartContext } from "../../Provider/CartProvider";
 import { WishlistContext } from "../../Provider/WishlistProvider";
+import { getFinalPrice } from "../../components/api/price";
 
 const ProductsDetails = () => {
   const { id } = useParams();
@@ -31,15 +32,21 @@ const ProductsDetails = () => {
     },
   });
 
+  
   if (isLoading) return <Loading />;
   if (error) return toast.error(error.message);
-
-  const { name, color, description, image, price, ratings } = product;
+  
+  const { name, color, description, image, price, ratings, stock, discount } =
+  product;
+  const finalPrice = getFinalPrice(price, discount);
 
   const increaseQty = () => setQuantity((prev) => prev + 1);
   const decreaseQty = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
   // buynow
   const handleBuyNow = () => {
+    if (stock <= 0) {
+      return toast.error("Out of Stock");
+    }
     if (!selectedColor) {
       toast.error("Please select a color");
       return;
@@ -48,7 +55,7 @@ const ProductsDetails = () => {
     const newItem = {
       id,
       name,
-      price,
+      price:finalPrice,
       image,
       color: selectedColor,
       quantity,
@@ -83,6 +90,10 @@ const ProductsDetails = () => {
     }
   };
 
+  const hasDiscount = discount > 0;
+
+
+
   return (
     <section className="py-16 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4">
@@ -102,8 +113,35 @@ const ProductsDetails = () => {
             <div className="flex gap-3 text-sm">
               <span className="text-yellow-400">★★★★★</span>
               <span>({ratings})</span>
+              ||
+              <p>
+                {stock > 0 ? (
+                  <span className="bg-green-500 text-white px-2 py-1 rounded-full text-xs">
+                    In Stock
+                  </span>
+                ) : (
+                  <span className="bg-red-500 text-white px-2 py-1 rounded-full text-xs">
+                    Out of Stock
+                  </span>
+                )}
+              </p>
             </div>
-            <p className="text-3xl text-red-600 font-semibold">${price}</p>
+            <div>
+              {hasDiscount ? (
+                <div className="flex items-center gap-3">
+                  <p className="text-gray-400 line-through text-xl">${price}</p>
+                  <p className="text-3xl text-red-600 font-semibold">
+                    ${finalPrice}
+                  </p>
+                  <span className="bg-red-100 text-red-600 px-2 py-1 rounded text-sm">
+                    -{discount}%
+                  </span>
+                </div>
+              ) : (
+                <p className="text-3xl text-red-600 font-semibold">${price}</p>
+              )}
+            </div>
+
             <p className="text-gray-600">{description}</p>
 
             {/* Colors */}
@@ -151,13 +189,18 @@ const ProductsDetails = () => {
                 onClick={handleBuyNow}
                 className="flex-1 h-14 bg-red-600 text-white font-semibold rounded-xl hover:bg-red-700"
               >
-                Buy Now
+                {" "}
+                Buy Now{" "}
               </button>
 
               <button
                 onClick={handleWishlist}
                 className={`w-14 h-14 border rounded-xl flex items-center justify-center
-               ${isInWishlist(id, selectedColor) ? "text-red-500" : "text-gray-600"}
+               ${
+                 isInWishlist(id, selectedColor)
+                   ? "text-red-500"
+                   : "text-gray-600"
+               }
                `}
               >
                 <FaHeart />

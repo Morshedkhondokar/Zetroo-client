@@ -26,7 +26,7 @@ const CartTotalSummary = ({ subtotal, shipping = 'Free', total }) => {
             </div>
 
             {/* Checkout Button */}
-            <button className="w-full mt-4 px-6 py-3 bg-red-600 text-white rounded-md font-medium hover:bg-red-700 transition-colors">
+            <button  className="w-full mt-4 px-6 py-3 bg-red-600 text-white rounded-md font-medium hover:bg-red-700 transition-colors">
                 Proccedes to Checkout
             </button>
         </div>
