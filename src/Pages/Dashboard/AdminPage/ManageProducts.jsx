@@ -55,7 +55,7 @@ const ManageProducts = () => {
     onSuccess: () => {
       toast.success("Product updated successfully");
       queryClient.invalidateQueries({ queryKey: ["products"] });
-      setSelectedProduct(null); // Close modal on success
+      setSelectedProduct(null); 
     },
     onError: (error) => toast.error(`Failed to update product: ${error.message}`),
   });
@@ -68,7 +68,7 @@ const ManageProducts = () => {
       deleteMutation.mutate(id);
     }
   };
-
+  // modal open 
   const handleUpdate = (product) => {
     setSelectedProduct(product);
   };
