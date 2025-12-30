@@ -21,7 +21,7 @@ const ProductsCard = ({ onlyDiscount }) => {
     },
   });
 
-  console.log(products)
+  // console.log(products)
 
   if (isLoading) {
     return <Loading />;

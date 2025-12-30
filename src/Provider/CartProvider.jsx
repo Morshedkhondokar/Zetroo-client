@@ -40,6 +40,12 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  const clearCart = () => {
+  setCartItems([]);
+  localStorage.removeItem("cart");
+};
+
+
   
   const cartCount = cartItems.length;
 
@@ -51,6 +57,7 @@ export const CartProvider = ({ children }) => {
         removeFromCart,
         updateQuantity,
         cartCount,
+        clearCart,
       }}
     >
       {children}
