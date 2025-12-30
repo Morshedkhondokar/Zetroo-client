@@ -1,7 +1,7 @@
 import Lottie from "lottie-react";
 import { useForm } from "react-hook-form";
 import loginLottie from "../../../public/Login.json";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../components/hooks/useAuth";
 import toast from "react-hot-toast";
 import { ImSpinner9 } from "react-icons/im";
@@ -10,6 +10,8 @@ import SignInGoogle from "./SignInGoogle";
 const Login = () => {
   const { signIn, loading, setLoading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation()
+  const form = location.state?.from  || '/'
   const {
     register,
     handleSubmit,
@@ -23,7 +25,7 @@ const Login = () => {
       setLoading(true);
       await signIn(email, password);
       toast.success("Login Successfully.");
-      navigate("/");
+      navigate(form);
     } catch (error) {
       setLoading(false);
       console.log(error);

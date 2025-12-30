@@ -1,15 +1,17 @@
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../components/hooks/useAuth";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 const SignInGoogle = () => {
   const { signInWithGoogle } = useAuth();
   const navigate = useNavigate()
+   const location = useLocation()
+  const form = location.state?.from || '/'
 
   const handleLoginGoogle = async () =>{
    await  signInWithGoogle()
-    navigate('/')
+    navigate(form)
   }
 
   return (

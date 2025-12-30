@@ -38,11 +38,6 @@ const DashboardSidebar = ({ role }) => {
           <div>
             <p className="sidebar-title">Admin Panel</p>
             <SidebarLink
-              to="/dashboard/statistics"
-              icon={<FiBarChart2 />}
-              text="Statistics"
-            />
-            <SidebarLink
               to="/dashboard/add-product"
               icon={<FiPlusCircle />}
               text="Add Product"
