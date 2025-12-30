@@ -10,7 +10,6 @@ import ProductsDetails from "../Pages/ProductsDetails/ProductsDetails";
 import Cart from "../Pages/Cart/Cart";
 import Error from "../Pages/Error/Error";
 import Dashboard from "../Pages/Dashboard/Dashboard";
-import Statistics from "../Pages/Dashboard/AdminPage/Statistics";
 import AddProduct from "../Pages/Dashboard/AdminPage/AddProduct";
 import ManageProducts from "../Pages/Dashboard/AdminPage/ManageProducts";
 import ManageOrders from "../Pages/Dashboard/AdminPage/ManageOrders";
